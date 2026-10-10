@@ -5,12 +5,13 @@
   import Menu from './routes/Menu.svelte'
   import Story from './routes/Story.svelte'
   import Visit from './routes/Visit.svelte'
+  import NotFound from './routes/NotFound.svelte'
 
   const routes = { '/': Home, '/menu': Menu, '/story': Story, '/visit': Visit }
 
   function current() {
     const h = window.location.hash.replace(/^#/, '') || '/'
-    return routes[h] || Home
+    return routes[h] || NotFound
   }
 
   let Page = current()
