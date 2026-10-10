@@ -1,14 +1,28 @@
 <script>
+  import { onMount } from 'svelte'
+
   let open = false
   let path = window.location.hash.replace(/^#/, '') || '/'
+  let dark = false
+
+  onMount(() => {
+    dark = localStorage.getItem('theme') === 'dark'
+    document.body.classList.toggle('dark', dark)
+  })
+
+  function toggle() { open = !open }
+  function close() { open = false }
+
+  function toggleTheme() {
+    dark = !dark
+    document.body.classList.toggle('dark', dark)
+    localStorage.setItem('theme', dark ? 'dark' : 'light')
+  }
 
   window.addEventListener('hashchange', () => {
     path = window.location.hash.replace(/^#/, '') || '/'
     open = false
   })
-
-  function toggle() { open = !open }
-  function close() { open = false }
 </script>
 
 <header class="nav">
@@ -23,6 +37,14 @@
     </nav>
 
     <div class="pill">Belvedere</div>
+
+    <button class="theme-toggle" on:click={toggleTheme} aria-label="Toggle dark mode">
+      {#if dark}
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      {:else}
+        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      {/if}
+    </button>
 
     <button class="hamburger" class:active={open} on:click={toggle} aria-label="Toggle menu">
       <span></span>
@@ -41,13 +63,13 @@
 
 <style>
   .nav { max-width: 72rem; margin: 0 auto; padding: 2rem 1.5rem; }
-  .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
 
   .brand {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     letter-spacing: 0.025em;
-    color: #292524;
+    color: var(--text);
     text-decoration: none;
   }
 
@@ -59,7 +81,7 @@
     font-size: 0.875rem;
     font-weight: 300;
     letter-spacing: 0.05em;
-    color: #44403c;
+    color: var(--text-soft);
     text-decoration: none;
   }
   .links a::after {
@@ -69,7 +91,7 @@
     height: 1.5px;
     bottom: -4px;
     left: 0;
-    background: #ea580c;
+    background: var(--orange-600);
     transition: width 0.3s ease;
   }
   .links a:hover::after,
@@ -79,17 +101,17 @@
     display: none;
     font-size: 0.875rem;
     color: rgba(194, 65, 12, 0.4);
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     padding: 0.375rem 1rem;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--card-soft);
     backdrop-filter: blur(4px);
   }
   @media (min-width: 768px) { .pill { display: block; } }
 
   .hamburger {
-    background: rgba(255, 247, 237, 0.7);
-    border: 1px solid rgba(234, 88, 12, 0.5);
+    background: var(--card-soft);
+    border: 1px solid var(--border);
     border-radius: 0.75rem;
     padding: 0.6rem 0.75rem;
     cursor: pointer;
@@ -98,10 +120,10 @@
     gap: 5px;
     backdrop-filter: blur(4px);
     transition: border-color 0.3s ease, background 0.3s ease;
+    margin-left: 0.5rem;
   }
   .hamburger:hover {
-    border-color: rgba(234, 88, 12, 0.85);
-    background: rgba(255, 237, 213, 0.9);
+    border-color: var(--orange-500);
   }
   @media (min-width: 768px) { .hamburger { display: none; } }
 
@@ -109,7 +131,7 @@
     display: block;
     width: 22px;
     height: 2px;
-    background: #ea580c;
+    background: var(--orange-600);
     border-radius: 2px;
     transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.25s ease;
   }
@@ -131,11 +153,11 @@
     padding: 0.9rem 0;
     font-size: 0.95rem;
     letter-spacing: 0.05em;
-    color: #57534e;
+    color: var(--text-soft);
     text-decoration: none;
-    border-bottom: 1px solid rgba(194, 65, 12, 0.15);
+    border-bottom: 1px solid var(--border-soft);
     transition: color 0.3s ease, padding-left 0.3s ease;
   }
   .mobile a:last-child { border-bottom: none; }
-  .mobile a:hover { color: #ea580c; padding-left: 0.5rem; }
+  .mobile a:hover { color: var(--orange-600); padding-left: 0.5rem; }
 </style>

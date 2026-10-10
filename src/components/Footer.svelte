@@ -37,7 +37,7 @@
 </footer>
 
 <style>
-  .footer { border-top: 1px solid rgba(124, 45, 18, 0.2); }
+  .footer { border-top: 1px solid var(--border-soft); }
   .footer-inner { max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem; }
 
   .footer-grid {
@@ -52,13 +52,13 @@
   .brand {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
-    color: #292524;
+    color: var(--text);
     margin-bottom: 1rem;
   }
 
   .blurb {
     font-size: 0.875rem;
-    color: rgba(120, 113, 108, 0.8);
+    color: var(--text-mute);
     line-height: 1.625;
     max-width: 20rem;
     margin: 0;
@@ -77,7 +77,7 @@
     padding: 0;
     margin: 0;
     font-size: 0.875rem;
-    color: #57534e;
+    color: var(--text-soft);
     font-weight: 300;
   }
   .info li { margin-bottom: 0.5rem; }
@@ -88,13 +88,13 @@
     height: 2.5rem;
     object-fit: cover;
     border-radius: 0.5rem;
-    border: 1px solid rgba(251, 146, 60, 0.4);
+    border: 1px solid var(--border);
     display: block;
   }
 
   .quote {
     font-size: 0.75rem;
-    color: rgba(120, 113, 108, 0.8);
+    color: var(--text-mute);
     font-style: italic;
     margin-top: 1.5rem;
   }
@@ -105,7 +105,7 @@
     color: rgba(194, 65, 12, 0.4);
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(124, 45, 18, 0.2);
+    border-top: 1px solid var(--border-soft);
   }
 
   .spin {

@@ -28,14 +28,14 @@
     font-size: 3rem;
     line-height: 1.1;
     font-weight: 500;
-    color: #292524;
+    color: var(--text);
     margin: 0 0 1rem;
   }
   .head h1 em { font-style: italic; color: #ea580c; }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
-    color: #57534e;
+    color: var(--text-soft);
     max-width: 28rem;
     margin: 0 auto;
     font-weight: 300;
@@ -56,14 +56,14 @@
     letter-spacing: 0.025em;
     padding: 0.875rem 2rem;
     border-radius: 9999px;
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     transition: background 0.3s ease;
     text-decoration: none;
   }
   .btn-primary:hover { background: rgba(194, 65, 12, 0.95); }
 
   .btn-secondary {
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--card-soft);
     color: rgba(194, 65, 12, 0.7);
     font-size: 0.875rem;
     letter-spacing: 0.025em;

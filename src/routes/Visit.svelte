@@ -110,14 +110,14 @@
     font-size: 3rem;
     line-height: 1.1;
     font-weight: 500;
-    color: #292524;
+    color: var(--text);
     margin: 0 0 1rem;
   }
   .head h1 em { font-style: italic; color: #ea580c; }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
-    color: #57534e;
+    color: var(--text-soft);
     max-width: 28rem;
     margin: 0 auto;
     font-weight: 300;
@@ -133,7 +133,7 @@
   h2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.875rem;
-    color: #292524;
+    color: var(--text);
     margin: 0 0 2rem;
   }
   .dot { color: #ea580c; }
@@ -148,14 +148,14 @@
   }
   .details li {
     font-size: 0.9375rem;
-    color: #57534e;
+    color: var(--text-soft);
     line-height: 1.6;
   }
   .details strong {
     display: block;
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
-    color: #292524;
+    color: var(--text);
     font-weight: 500;
     margin-bottom: 0.25rem;
   }
@@ -165,14 +165,14 @@
     height: 16rem;
     object-fit: cover;
     border-radius: 1.5rem;
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     display: block;
   }
 
   .form-wrap {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--card);
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     border-radius: 1.5rem;
     padding: 2.5rem;
   }
@@ -195,11 +195,11 @@
     width: 100%;
     padding: 0.75rem 1rem;
     border-radius: 0.75rem;
-    border: 1px solid rgba(251, 146, 60, 0.4);
-    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border);
+    background: var(--card);
     font-family: inherit;
     font-size: 0.95rem;
-    color: #292524;
+    color: var(--text);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
   }
@@ -222,7 +222,7 @@
     letter-spacing: 0.025em;
     padding: 0.875rem 2rem;
     border-radius: 9999px;
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     cursor: pointer;
     transition: background 0.3s ease;
     margin-top: 0.5rem;
@@ -234,7 +234,7 @@
     padding: 1rem 1.25rem;
     border-radius: 0.75rem;
     background: rgba(255, 237, 213, 0.8);
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     color: #c2410c;
     font-size: 0.9rem;
     line-height: 1.5;

@@ -78,12 +78,12 @@
   .hero-title {
     font-family: 'Playfair Display', serif;
     font-size: 3.75rem; line-height: 1.1; font-weight: 500;
-    color: #292524; margin: 0;
+    color: var(--text); margin: 0;
   }
   .hero-title em { font-style: italic; color: #ea580c; }
   @media (min-width: 768px) { .hero-title { font-size: 4.5rem; } }
   .hero-sub {
-    font-size: 1.125rem; color: #57534e;
+    font-size: 1.125rem; color: var(--text-soft);
     max-width: 28rem; font-weight: 300; line-height: 1.625; margin: 0;
   }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 1.25rem; padding-top: 1rem; }
@@ -91,12 +91,12 @@
     background: rgba(234, 88, 12, 0.9);
     color: #fff7ed; font-size: 0.875rem; letter-spacing: 0.025em;
     padding: 0.875rem 2rem; border-radius: 9999px;
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     transition: background 0.3s ease; text-decoration: none;
   }
   .btn-primary:hover { background: rgba(194, 65, 12, 0.95); }
   .btn-secondary {
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--card-soft);
     color: rgba(194, 65, 12, 0.7); font-size: 0.875rem; letter-spacing: 0.025em;
     padding: 0.875rem 2rem; border-radius: 9999px;
     border: 1px solid rgba(249, 115, 22, 0.4);
@@ -112,10 +112,10 @@
   }
   .hero-art-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--card);
     backdrop-filter: blur(4px);
     border-radius: 1.5rem; padding: 1rem;
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   }
@@ -126,26 +126,26 @@
   }
   .pour { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 7rem; }
   .pour-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; }
-  .pour-head h2 { font-family: 'Playfair Display', serif; font-size: 2.25rem; color: #292524; margin: 0; }
+  .pour-head h2 { font-family: 'Playfair Display', serif; font-size: 2.25rem; color: var(--text); margin: 0; }
   .dot { color: #ea580c; }
   @media (min-width: 768px) { .pour-head h2 { font-size: 3rem; } }
   .pour-note { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(249, 115, 22, 0.6); }
   .pour-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
   @media (min-width: 768px) { .pour-grid { grid-template-columns: repeat(3, 1fr); } }
   .pour-card {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--card);
     backdrop-filter: blur(4px);
     border-radius: 1.5rem; padding: 1.5rem;
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
   }
   .pour-card:hover { transform: translateY(-4px); box-shadow: 0 20px 30px -10px rgba(234, 88, 12, 0.15); }
   .pour-card img {
     width: 100%; height: 12rem; object-fit: cover;
     border-radius: 1rem; margin-bottom: 1.5rem;
-    border: 1px solid rgba(251, 146, 60, 0.3); display: block;
+    border: 1px solid var(--border); display: block;
   }
-  .pour-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #292524; margin: 0 0 0.5rem; }
+  .pour-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--text); margin: 0 0 0.5rem; }
   .pour-card p { color: rgba(249, 115, 22, 0.6); font-size: 0.875rem; margin: 0; }
   .pour-cta { margin-top: 3rem; text-align: center; }
   .full-menu-link {
@@ -153,7 +153,7 @@
     font-size: 2.25rem; line-height: 1;
     color: rgba(234, 88, 12, 0.85); text-decoration: none;
     display: inline-block; padding-bottom: 0.4rem;
-    border-bottom: 1px solid rgba(251, 146, 60, 0.5);
+    border-bottom: 1px solid var(--border);
     transition: color 0.35s ease, letter-spacing 0.35s ease;
   }
   .full-menu-link:hover { color: #c2410c; letter-spacing: 0.05em; }

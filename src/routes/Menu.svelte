@@ -121,14 +121,14 @@
     font-size: 3rem;
     line-height: 1.1;
     font-weight: 500;
-    color: #292524;
+    color: var(--text);
     margin: 0 0 1rem;
   }
   .head h1 em { font-style: italic; color: #ea580c; }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
-    color: #57534e;
+    color: var(--text-soft);
     max-width: 28rem;
     margin: 0 auto;
     font-weight: 300;
@@ -139,7 +139,7 @@
   .group h2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.875rem;
-    color: #292524;
+    color: var(--text);
     margin: 0 0 2rem;
   }
   .dot { color: #ea580c; }
@@ -151,21 +151,21 @@
   }
   @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 
-  .item { border-bottom: 1px solid rgba(124, 45, 18, 0.2); padding-bottom: 1rem; }
+  .item { border-bottom: 1px solid var(--border-soft); padding-bottom: 1rem; }
   .item img {
     width: 100%;
     height: 12rem;
     object-fit: cover;
     border-radius: 1rem;
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(251, 146, 60, 0.3);
+    border: 1px solid var(--border);
     display: block;
   }
   .row { display: flex; justify-content: space-between; align-items: baseline; }
   .row h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.25rem;
-    color: #292524;
+    color: var(--text);
     margin: 0;
   }
   .row p {

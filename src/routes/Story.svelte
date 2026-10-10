@@ -65,14 +65,14 @@
     font-size: 3rem;
     line-height: 1.1;
     font-weight: 500;
-    color: #292524;
+    color: var(--text);
     margin: 0 0 1rem;
   }
   .head h1 em { font-style: italic; color: #ea580c; }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
-    color: #57534e;
+    color: var(--text-soft);
     max-width: 28rem;
     margin: 0 auto;
     font-weight: 300;
@@ -89,7 +89,7 @@
 
   .copy p {
     font-size: 1.0625rem;
-    color: #57534e;
+    color: var(--text-soft);
     line-height: 1.75;
     font-weight: 300;
     margin: 0 0 1.25rem;
@@ -101,7 +101,7 @@
     aspect-ratio: 4 / 5;
     object-fit: cover;
     border-radius: 1.5rem;
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
     display: block;
   }
@@ -114,9 +114,9 @@
   @media (min-width: 768px) { .values { grid-template-columns: repeat(3, 1fr); } }
 
   .value {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--card);
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(234, 88, 12, 0.4);
+    border: 1px solid var(--border);
     border-radius: 1.5rem;
     padding: 2rem;
   }
@@ -129,12 +129,12 @@
   .value h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.25rem;
-    color: #292524;
+    color: var(--text);
     margin: 0 0 0.5rem;
   }
   .value p {
     font-size: 0.9375rem;
-    color: #57534e;
+    color: var(--text-soft);
     line-height: 1.6;
     font-weight: 300;
     margin: 0;

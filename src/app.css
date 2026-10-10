@@ -11,7 +11,30 @@
   --stone-600:  #57534e;
   --stone-700:  #44403c;
   --stone-800:  #292524;
+
   --bg:         #fffaf5;
+  --bg-glow-a:  rgba(255, 165, 80, 0.10);
+  --bg-glow-b:  rgba(255, 140, 60, 0.08);
+  --text:       #292524;
+  --text-soft:  #57534e;
+  --text-mute:  rgba(120, 113, 108, 0.8);
+  --card:       rgba(255, 255, 255, 0.8);
+  --card-soft:  rgba(255, 255, 255, 0.7);
+  --border:     rgba(234, 88, 12, 0.4);
+  --border-soft:rgba(124, 45, 18, 0.2);
+}
+
+body.dark {
+  --bg:         #1a1210;
+  --bg-glow-a:  rgba(234, 88, 12, 0.15);
+  --bg-glow-b:  rgba(251, 146, 60, 0.10);
+  --text:       #fff7ed;
+  --text-soft:  #e7d5c1;
+  --text-mute:  rgba(231, 213, 193, 0.6);
+  --card:       rgba(41, 32, 28, 0.85);
+  --card-soft:  rgba(41, 32, 28, 0.7);
+  --border:     rgba(251, 146, 60, 0.35);
+  --border-soft:rgba(251, 146, 60, 0.15);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,14 +44,15 @@ html, body { height: 100%; }
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg);
-  color: var(--stone-800);
+  color: var(--text);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image:
-    radial-gradient(circle at 15% 10%, rgba(255, 165, 80, 0.10) 0%, transparent 40%),
-    radial-gradient(circle at 85% 90%, rgba(255, 140, 60, 0.08) 0%, transparent 45%);
+    radial-gradient(circle at 15% 10%, var(--bg-glow-a) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, var(--bg-glow-b) 0%, transparent 45%);
   background-attachment: fixed;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 main { min-height: 60vh; }
@@ -39,5 +63,35 @@ img { max-width: 100%; display: block; }
 
 ::selection {
   background: rgba(251, 146, 60, 0.3);
-  color: var(--stone-800);
+  color: var(--text);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--card-soft);
+  color: var(--orange-600);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  border-color: var(--orange-500);
+  transform: rotate(15deg);
+}
+.theme-toggle svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
