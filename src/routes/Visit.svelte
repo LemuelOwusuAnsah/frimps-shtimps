@@ -1,15 +1,85 @@
 <script>
+  import { onMount } from 'svelte'
+
   let name = ''
   let email = ''
   let date = ''
+  let time = '19:00'
   let party = '2'
   let notes = ''
+  let sending = false
   let sent = false
+  let errors = {}
+  let touched = {}
 
-  function submit(e) {
+  const times = [
+    '12:00','12:30','13:00','13:30','14:00','14:30',
+    '17:00','17:30','18:00','18:30','19:00','19:30',
+    '20:00','20:30','21:00'
+  ]
+
+  onMount(() => {
+    const d = new Date()
+    d.setDate(d.getDate() + 1)
+    date = d.toISOString().slice(0, 10)
+  })
+
+  function validate() {
+    const e = {}
+    if (!name.trim()) e.name = 'Tell us your name'
+    else if (name.trim().length < 2) e.name = 'That seems a bit short'
+
+    if (!email.trim()) e.email = 'We need an email to confirm'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = 'That email looks off'
+
+    if (!date) e.date = 'Pick a date'
+    else {
+      const picked = new Date(date)
+      const today = new Date()
+      today.setHours(0,0,0,0)
+      if (picked < today) e.date = 'Pick a date in the future'
+    }
+
+    if (!time) e.time = 'Pick a time'
+    if (!party) e.party = 'How many of you?'
+
+    errors = e
+    return Object.keys(e).length === 0
+  }
+
+  function blur(field) {
+    touched = { ...touched, [field]: true }
+    validate()
+  }
+
+  function input() {
+    if (Object.keys(touched).length) validate()
+  }
+
+  async function submit(e) {
     e.preventDefault()
+    touched = { name: true, email: true, date: true, time: true, party: true }
+    if (!validate()) return
+
+    sending = true
+    await new Promise(r => setTimeout(r, 900))
+    sending = false
     sent = true
   }
+
+  function reset() {
+    name = ''
+    email = ''
+    date = ''
+    time = '19:00'
+    party = '2'
+    notes = ''
+    errors = {}
+    touched = {}
+    sent = false
+  }
+
+  $: minDate = new Date().toISOString().slice(0, 10)
 </script>
 
 <section class="page">
@@ -34,7 +104,7 @@
         </li>
         <li>
           <strong>Phone</strong>
-          01322 000 000
+          <a href="tel:+441322000000">01322 000 000</a>
         </li>
       </ul>
 
@@ -46,48 +116,109 @@
     <div class="form-wrap">
       <h2><span class="dot">·</span> Book a table</h2>
 
-      <form on:submit={submit}>
-        <label class="field">
-          <span>Name</span>
-          <input type="text" bind:value={name} required placeholder="Your name">
-        </label>
-
-        <label class="field">
-          <span>Email</span>
-          <input type="email" bind:value={email} required placeholder="you@example.com">
-        </label>
-
-        <div class="two">
-          <label class="field">
-            <span>Date</span>
-            <input type="date" bind:value={date} required>
-          </label>
-          <label class="field">
-            <span>Party size</span>
-            <select bind:value={party}>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7+</option>
-            </select>
-          </label>
-        </div>
-
-        <label class="field">
-          <span>Notes</span>
-          <textarea bind:value={notes} rows="3" placeholder="Anything we should know?"></textarea>
-        </label>
-
-        <button type="submit" class="btn">Request booking</button>
-      </form>
-
       {#if sent}
-        <div class="success">
-          Thanks {name || 'friend'} — we've got your request for {party} on {date}. We'll email {email} shortly.
+        <div class="success" role="status">
+          <div class="success-mark">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          <h3>Booking requested</h3>
+          <p>
+            Thanks {name.split(' ')[0]} — we've got your table for <strong>{party}</strong>
+            on <strong>{date}</strong> at <strong>{time}</strong>.
+            A confirmation is on its way to <strong>{email}</strong>.
+          </p>
+          <button class="btn-secondary" on:click={reset}>Book another</button>
         </div>
+      {:else}
+        <form on:submit={submit} novalidate>
+          <label class="field" class:error={errors.name && touched.name}>
+            <span>Name</span>
+            <input
+              type="text"
+              bind:value={name}
+              on:blur={() => blur('name')}
+              on:input={input}
+              placeholder="Your name"
+              autocomplete="name"
+            >
+            {#if errors.name && touched.name}
+              <em class="msg">{errors.name}</em>
+            {/if}
+          </label>
+
+          <label class="field" class:error={errors.email && touched.email}>
+            <span>Email</span>
+            <input
+              type="email"
+              bind:value={email}
+              on:blur={() => blur('email')}
+              on:input={input}
+              placeholder="you@example.com"
+              autocomplete="email"
+            >
+            {#if errors.email && touched.email}
+              <em class="msg">{errors.email}</em>
+            {/if}
+          </label>
+
+          <div class="two">
+            <label class="field" class:error={errors.date && touched.date}>
+              <span>Date</span>
+              <input
+                type="date"
+                bind:value={date}
+                min={minDate}
+                on:blur={() => blur('date')}
+                on:change={input}
+              >
+              {#if errors.date && touched.date}
+                <em class="msg">{errors.date}</em>
+              {/if}
+            </label>
+
+            <label class="field" class:error={errors.time && touched.time}>
+              <span>Time</span>
+              <select bind:value={time} on:change={input}>
+                {#each times as t}
+                  <option value={t}>{t}</option>
+                {/each}
+              </select>
+            </label>
+          </div>
+
+          <label class="field" class:error={errors.party && touched.party}>
+            <span>Party size</span>
+            <div class="party">
+              {#each ['1','2','3','4','5','6','7+'] as p}
+                <button
+                  type="button"
+                  class="chip"
+                  class:active={party === p}
+                  on:click={() => { party = p; input() }}
+                >{p}</button>
+              {/each}
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Notes <em class="opt">(optional)</em></span>
+            <textarea
+              bind:value={notes}
+              rows="3"
+              placeholder="Allergies, celebrations, seating preference…"
+            ></textarea>
+          </label>
+
+          <button type="submit" class="btn" disabled={sending}>
+            {#if sending}
+              <span class="spinner"></span> Sending…
+            {:else}
+              Request booking
+            {/if}
+          </button>
+        </form>
       {/if}
     </div>
   </div>
@@ -113,7 +244,7 @@
     color: var(--text);
     margin: 0 0 1rem;
   }
-  .head h1 em { font-style: italic; color: #ea580c; }
+  .head h1 em { font-style: italic; color: var(--orange-600); }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
@@ -136,7 +267,7 @@
     color: var(--text);
     margin: 0 0 2rem;
   }
-  .dot { color: #ea580c; }
+  .dot { color: var(--orange-600); }
 
   .details {
     list-style: none;
@@ -159,6 +290,7 @@
     font-weight: 500;
     margin-bottom: 0.25rem;
   }
+  .details a { color: var(--orange-600); }
 
   .map img {
     width: 100%;
@@ -180,7 +312,7 @@
   form { display: flex; flex-direction: column; gap: 1.25rem; }
 
   .field { display: block; }
-  .field span {
+  .field > span {
     display: block;
     font-size: 0.75rem;
     letter-spacing: 0.1em;
@@ -188,6 +320,14 @@
     color: rgba(194, 65, 12, 0.6);
     margin-bottom: 0.5rem;
   }
+  .opt {
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-mute);
+    font-size: 0.7rem;
+  }
+
   .field input,
   .field select,
   .field textarea {
@@ -207,36 +347,136 @@
   .field select:focus,
   .field textarea:focus {
     outline: none;
-    border-color: rgba(234, 88, 12, 0.7);
+    border-color: var(--orange-600);
     box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.15);
   }
   .field textarea { resize: vertical; }
 
+  .field.error input,
+  .field.error select {
+    border-color: #dc2626;
+  }
+  .field.error input:focus,
+  .field.error select:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  }
+
+  .msg {
+    display: block;
+    font-style: normal;
+    font-size: 0.75rem;
+    color: #dc2626;
+    margin-top: 0.4rem;
+  }
+
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-  .btn {
-    background: rgba(234, 88, 12, 0.9);
+  .party {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .chip {
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.95rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background: var(--card-soft);
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-width: 2.4rem;
+  }
+  .chip:hover { border-color: var(--orange-500); color: var(--orange-600); }
+  .chip.active {
+    background: var(--orange-600);
     color: #fff7ed;
+    border-color: var(--orange-600);
+  }
+  .chip:focus-visible {
+    outline: 2px solid var(--orange-500);
+    outline-offset: 2px;
+  }
+
+  .btn, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     font-family: inherit;
     font-size: 0.875rem;
     letter-spacing: 0.025em;
     padding: 0.875rem 2rem;
     border-radius: 9999px;
-    border: 1px solid var(--border);
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
     margin-top: 0.5rem;
   }
-  .btn:hover { background: rgba(194, 65, 12, 0.95); }
+  .btn {
+    background: var(--orange-600);
+    color: #fff7ed;
+    border: 1px solid var(--orange-600);
+    width: 100%;
+  }
+  .btn:hover:not(:disabled) { background: var(--orange-700); }
+  .btn:disabled { opacity: 0.7; cursor: wait; }
+  .btn:focus-visible { outline: 2px solid var(--orange-500); outline-offset: 3px; }
+
+  .btn-secondary {
+    background: var(--card-soft);
+    color: var(--orange-600);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--orange-500); }
+
+  .spinner {
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 2px solid rgba(255,247,237,0.3);
+    border-top-color: #fff7ed;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   .success {
-    margin-top: 1.25rem;
-    padding: 1rem 1.25rem;
-    border-radius: 0.75rem;
-    background: rgba(255, 237, 213, 0.8);
-    border: 1px solid var(--border);
-    color: #c2410c;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    text-align: center;
+    padding: 1rem 0;
+    animation: fade 0.5s ease;
+  }
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .success-mark {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: rgba(234, 88, 12, 0.12);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 1.25rem;
+  }
+  .success-mark svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    stroke: var(--orange-600);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .success h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin: 0 0 0.75rem;
+  }
+  .success p {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin: 0 0 1.75rem;
   }
 </style>
