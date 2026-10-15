@@ -1,3 +1,34 @@
+<script>
+  const timeline = [
+    {
+      year: '2019',
+      title: 'We took the keys',
+      text: 'A tired corner boozer on Nuxley Road. Fresh paint, new taps, same regulars.'
+    },
+    {
+      year: '2021',
+      title: 'The kitchen opened',
+      text: 'Real food, cooked to order. Sunday roasts sold out the first weekend.'
+    },
+    {
+      year: '2023',
+      title: 'Six taps, all local',
+      text: 'Every beer on the wall now comes from within 40 miles of Belvedere.'
+    },
+    {
+      year: '2025',
+      title: 'Still pouring',
+      text: 'Same family, same promise. Come in and see for yourself.'
+    }
+  ]
+
+  const values = [
+    { n: '01', h: 'Local first', p: 'Kentish ales, Kentish produce, Kentish people behind the bar.' },
+    { n: '02', h: 'Pour it properly', p: 'Two-pour lagers, settled stouts, glassware that fits the beer.' },
+    { n: '03', h: 'Feed you well', p: 'Nothing frozen, nothing rushed. If it takes longer, it\'s worth it.' }
+  ]
+</script>
+
 <section class="page">
   <div class="head">
     <span class="tag">Our Story</span>
@@ -22,32 +53,49 @@
         doing a Sunday roast worth leaving the house for, and still
         saving a seat for whoever walks through the door next.
       </p>
+
+      <blockquote class="quote">
+        <p>"If it's not worth the walk, it's not worth the pour."</p>
+        <cite>— The Frimps family</cite>
+      </blockquote>
     </div>
 
     <div class="art">
-      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&h=1000&fit=crop&auto=format&q=80" alt="Pub interior">
+      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=900&h=1100&fit=crop&auto=format&q=80" alt="Pub interior">
+      <div class="art-stamp">
+        <span>EST.</span>
+        <strong>2019</strong>
+        <span>Belvedere</span>
+      </div>
     </div>
+  </div>
+
+  <div class="timeline">
+    <h2 class="tl-head"><span class="dot">·</span> How we got here</h2>
+    <ol class="tl-list">
+      {#each timeline as t, i}
+        <li class="tl-item" style="--i:{i}">
+          <div class="tl-year">{t.year}</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <h3>{t.title}</h3>
+            <p>{t.text}</p>
+          </div>
+        </li>
+      {/each}
+    </ol>
   </div>
 
   <div class="values">
-    <div class="value">
-      <div class="num">01</div>
-      <h3>Local first</h3>
-      <p>Kentish ales, Kentish produce, Kentish people behind the bar.</p>
-    </div>
-    <div class="value">
-      <div class="num">02</div>
-      <h3>Pour it properly</h3>
-      <p>Two-pour lagers, settled stouts, and glassware that fits the beer.</p>
-    </div>
-    <div class="value">
-      <div class="num">03</div>
-      <h3>Feed you well</h3>
-      <p>Nothing frozen, nothing rushed. If it takes longer, it's worth it.</p>
-    </div>
+    {#each values as v}
+      <div class="value">
+        <div class="num">{v.n}</div>
+        <h3>{v.h}</h3>
+        <p>{v.p}</p>
+      </div>
+    {/each}
   </div>
 </section>
-
 <style>
   .page { max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
 
@@ -57,7 +105,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(194, 65, 12, 0.7);
+    color: rgba(194, 65, 12, 0.75);
     margin-bottom: 1.5rem;
   }
   .head h1 {
@@ -68,7 +116,7 @@
     color: var(--text);
     margin: 0 0 1rem;
   }
-  .head h1 em { font-style: italic; color: #ea580c; }
+  .head h1 em { font-style: italic; color: var(--orange-600); }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
@@ -94,22 +142,168 @@
     font-weight: 300;
     margin: 0 0 1.25rem;
   }
-  .copy p:last-child { margin-bottom: 0; }
 
+  .quote {
+    margin: 2rem 0 0;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    border-left: 3px solid var(--orange-600);
+    background: linear-gradient(to right, rgba(251, 146, 60, 0.06), transparent);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+  .quote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0 0 0.75rem;
+  }
+  .quote cite {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange-600);
+    font-style: normal;
+  }
+
+  .art { position: relative; }
   .art img {
     width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     border-radius: 1.5rem;
     border: 1px solid var(--border);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
     display: block;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .art:hover img { transform: translateY(-6px); }
+
+  .art-stamp {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
+    background: var(--orange-600);
+    color: #fff7ed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    text-align: center;
+    box-shadow: 0 12px 24px -8px rgba(234, 88, 12, 0.5);
+    animation: float 5s ease-in-out infinite;
+  }
+  .art-stamp span {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .art-stamp strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  @media (max-width: 767px) { .art-stamp { display: none; } }
+
+  .timeline { margin-bottom: 6rem; }
+  .tl-head {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--text);
+    margin: 0 0 2.5rem;
+  }
+  .dot { color: var(--orange-600); }
+  @media (min-width: 768px) { .tl-head { font-size: 2.5rem; } }
+
+  .tl-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  .tl-list::before {
+    content: '';
+    position: absolute;
+    left: 4.75rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: var(--border-soft);
+  }
+  @media (max-width: 639px) { .tl-list::before { display: none; } }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0 0 2.5rem;
+    animation: slide 0.7s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+    animation-delay: calc(var(--i) * 120ms);
+  }
+  @media (min-width: 640px) {
+    .tl-item {
+      grid-template-columns: 4rem 1.5rem 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 0 0 2.5rem;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+  }
+  @keyframes slide {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .tl-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--orange-600);
+    font-weight: 500;
+  }
+  @media (max-width: 639px) {
+    .tl-year { margin-bottom: 0.25rem; }
+  }
+
+  .tl-dot {
+    display: none;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background: var(--orange-600);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--border);
+    margin-top: 0.55rem;
+    justify-self: center;
+  }
+  @media (min-width: 640px) { .tl-dot { display: block; } }
+
+  .tl-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin: 0 0 0.35rem;
+  }
+  .tl-body p {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+    font-weight: 300;
+    margin: 0;
   }
 
   .values {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   @media (min-width: 768px) { .values { grid-template-columns: repeat(3, 1fr); } }
 
@@ -119,6 +313,14 @@
     border: 1px solid var(--border);
     border-radius: 1.5rem;
     padding: 2rem;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.4s ease,
+                border-color 0.3s ease;
+  }
+  .value:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -14px rgba(234, 88, 12, 0.2);
+    border-color: var(--orange-500);
   }
   .num {
     font-family: 'Playfair Display', serif;

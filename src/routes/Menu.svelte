@@ -1,3 +1,93 @@
+<script>
+  let active = 'all'
+
+  const categories = [
+    { id: 'all', label: 'Everything' },
+    { id: 'tap', label: 'On Tap' },
+    { id: 'kitchen', label: 'Kitchen' },
+    { id: 'sweet', label: 'Sweet' }
+  ]
+
+  const items = [
+    {
+      cat: 'tap',
+      name: 'The Belvedere Pale',
+      notes: 'citrus · crisp · 4.2%',
+      price: '5.4',
+      img: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=800&h=600&fit=crop&auto=format&q=80',
+      badge: 'House'
+    },
+    {
+      cat: 'tap',
+      name: 'Shtimps Amber',
+      notes: 'toffee · malty · 4.6%',
+      price: '5.6',
+      img: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&h=600&fit=crop&auto=format&q=80',
+      badge: 'Regular'
+    },
+    {
+      cat: 'tap',
+      name: 'Midnight Stout',
+      notes: 'coffee · chocolate · 5.0%',
+      price: '5.8',
+      img: 'https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=800&h=600&fit=crop&auto=format&q=80',
+      badge: 'Guest'
+    },
+    {
+      cat: 'tap',
+      name: 'Belvedere Lager',
+      notes: 'clean · light · 4.0%',
+      price: '5.2',
+      img: 'https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=800&h=600&fit=crop&auto=format&q=80'
+    },
+    {
+      cat: 'kitchen',
+      name: 'Sunday Roast',
+      notes: 'beef · yorkies · all the trimmings',
+      price: '14.5',
+      img: 'https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=800&h=600&fit=crop&auto=format&q=80',
+      badge: 'Sunday'
+    },
+    {
+      cat: 'kitchen',
+      name: 'Frimps Fish & Chips',
+      notes: 'beer-battered · chunky chips · tartare',
+      price: '12.8',
+      img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&h=600&fit=crop&auto=format&q=80'
+    },
+    {
+      cat: 'kitchen',
+      name: 'Steak & Ale Pie',
+      notes: 'slow-cooked · puff pastry · gravy',
+      price: '11.5',
+      img: 'https://images.unsplash.com/photo-1548340748-6d2b7d7da280?w=800&h=600&fit=crop&auto=format&q=80'
+    },
+    {
+      cat: 'kitchen',
+      name: 'Shtimps Burger',
+      notes: 'beef · smoked cheddar · house sauce',
+      price: '13.2',
+      img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=600&fit=crop&auto=format&q=80'
+    },
+    {
+      cat: 'sweet',
+      name: 'Sticky Toffee Pudding',
+      notes: 'warm · butterscotch · vanilla ice cream',
+      price: '6.5',
+      img: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&h=600&fit=crop&auto=format&q=80'
+    },
+    {
+      cat: 'sweet',
+      name: 'Chocolate Brownie',
+      notes: 'fudgy · sea salt · clotted cream',
+      price: '6.2',
+      img: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&h=600&fit=crop&auto=format&q=80'
+    }
+  ]
+
+  $: filtered = active === 'all' ? items : items.filter(i => i.cat === active)
+</script>
+
 <section class="page">
   <div class="head">
     <span class="tag">Full Menu</span>
@@ -5,105 +95,44 @@
     <p class="sub">Beer, wine, spirits, and a kitchen that doesn't cut corners.</p>
   </div>
 
-  <div class="group">
-    <h2><span class="dot">·</span> On Tap</h2>
-    <div class="grid">
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=800&h=400&fit=crop&auto=format&q=80" alt="Pale ale">
-        <div class="row">
-          <div>
-            <h3>The Belvedere Pale</h3>
-            <p>citrus · crisp · 4.2%</p>
-          </div>
-          <span class="price">£5.4</span>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&h=400&fit=crop&auto=format&q=80" alt="Amber ale">
-        <div class="row">
-          <div>
-            <h3>Shtimps Amber</h3>
-            <p>toffee · malty · 4.6%</p>
-          </div>
-          <span class="price">£5.6</span>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=800&h=400&fit=crop&auto=format&q=80" alt="Stout">
-        <div class="row">
-          <div>
-            <h3>Midnight Stout</h3>
-            <p>coffee · chocolate · 5.0%</p>
-          </div>
-          <span class="price">£5.8</span>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=800&h=400&fit=crop&auto=format&q=80" alt="Lager">
-        <div class="row">
-          <div>
-            <h3>Belvedere Lager</h3>
-            <p>clean · light · 4.0%</p>
-          </div>
-          <span class="price">£5.2</span>
-        </div>
-      </div>
-    </div>
+  <div class="tabs" role="tablist">
+    {#each categories as c}
+      <button
+        class="tab"
+        class:active={active === c.id}
+        on:click={() => active = c.id}
+        role="tab"
+        aria-selected={active === c.id}
+      >
+        {c.label}
+      </button>
+    {/each}
   </div>
 
-  <div class="group">
-    <h2><span class="dot">·</span> From the Kitchen</h2>
-    <div class="grid">
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=800&h=400&fit=crop&auto=format&q=80" alt="Sunday roast">
-        <div class="row">
-          <div>
-            <h3>Sunday Roast</h3>
-            <p>beef · yorkies · all the trimmings</p>
-          </div>
-          <span class="price">£14.5</span>
+  <div class="grid">
+    {#each filtered as item, i (item.name)}
+      <article class="card" style="--i:{i}">
+        <div class="card-img">
+          <img src={item.img} alt={item.name}>
+          {#if item.badge}
+            <span class="badge">{item.badge}</span>
+          {/if}
         </div>
-      </div>
-
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&h=400&fit=crop&auto=format&q=80" alt="Fish and chips">
-        <div class="row">
-          <div>
-            <h3>Frimps Fish & Chips</h3>
-            <p>beer-battered · chunky chips · tartare</p>
+        <div class="card-body">
+          <div class="card-row">
+            <h3>{item.name}</h3>
+            <span class="price">£{item.price}</span>
           </div>
-          <span class="price">£12.8</span>
+          <p>{item.notes}</p>
         </div>
-      </div>
-
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1548340748-6d2b7d7da280?w=800&h=400&fit=crop&auto=format&q=80" alt="Pie and mash">
-        <div class="row">
-          <div>
-            <h3>Steak & Ale Pie</h3>
-            <p>slow-cooked · puff pastry · gravy</p>
-          </div>
-          <span class="price">£11.5</span>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=400&fit=crop&auto=format&q=80" alt="Burger">
-        <div class="row">
-          <div>
-            <h3>Shtimps Burger</h3>
-            <p>beef · smoked cheddar · house sauce</p>
-          </div>
-          <span class="price">£13.2</span>
-        </div>
-      </div>
-    </div>
+      </article>
+    {/each}
   </div>
+
+  {#if filtered.length === 0}
+    <p class="empty">Nothing here yet — check back soon.</p>
+  {/if}
 </section>
-
 <style>
   .page { max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
 
@@ -113,7 +142,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(194, 65, 12, 0.7);
+    color: rgba(194, 65, 12, 0.75);
     margin-bottom: 1.5rem;
   }
   .head h1 {
@@ -124,7 +153,7 @@
     color: var(--text);
     margin: 0 0 1rem;
   }
-  .head h1 em { font-style: italic; color: #ea580c; }
+  .head h1 em { font-style: italic; color: var(--orange-600); }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
@@ -132,46 +161,128 @@
     max-width: 28rem;
     margin: 0 auto;
     font-weight: 300;
-    line-height: 1.625;
+    line-height: 1.65;
   }
 
-  .group { margin-bottom: 3rem; }
-  .group h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.875rem;
-    color: var(--text);
-    margin: 0 0 2rem;
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
   }
-  .dot { color: #ea580c; }
+
+  .tab {
+    font-family: inherit;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background: var(--card-soft);
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(4px);
+  }
+  .tab:hover { border-color: var(--orange-500); color: var(--orange-600); }
+  .tab.active {
+    background: var(--orange-600);
+    color: #fff7ed;
+    border-color: var(--orange-600);
+    box-shadow: 0 8px 20px -8px rgba(234, 88, 12, 0.5);
+  }
+  .tab:focus-visible {
+    outline: 2px solid var(--orange-500);
+    outline-offset: 3px;
+  }
 
   .grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
-  .item { border-bottom: 1px solid var(--border-soft); padding-bottom: 1rem; }
-  .item img {
-    width: 100%;
-    height: 12rem;
-    object-fit: cover;
-    border-radius: 1rem;
-    margin-bottom: 1.5rem;
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(4px);
+    border-radius: 1.5rem;
     border: 1px solid var(--border);
-    display: block;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s ease,
+                border-color 0.3s ease;
+    animation: rise 0.6s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+    animation-delay: calc(var(--i) * 60ms);
   }
-  .row { display: flex; justify-content: space-between; align-items: baseline; }
-  .row h3 {
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 40px -14px rgba(234, 88, 12, 0.25);
+    border-color: var(--orange-500);
+  }
+
+  .card-img { position: relative; overflow: hidden; }
+  .card-img img {
+    width: 100%;
+    height: 13rem;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .card:hover .card-img img { transform: scale(1.05); }
+
+  .badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 9999px;
+    background: rgba(20, 12, 8, 0.75);
+    color: #fff7ed;
+    backdrop-filter: blur(6px);
+  }
+
+  .card-body { padding: 1.25rem 1.5rem 1.5rem; }
+
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.35rem;
+  }
+  .card-row h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: var(--text);
     margin: 0;
   }
-  .row p {
-    color: rgba(249, 115, 22, 0.6);
-    font-size: 0.875rem;
-    margin: 0.25rem 0 0;
+  .price {
+    font-size: 0.9rem;
+    color: var(--orange-600);
+    font-weight: 500;
+    white-space: nowrap;
   }
-  .price { color: rgba(249, 115, 22, 0.6); font-weight: 300; }
+  .card-body p {
+    font-size: 0.85rem;
+    color: var(--text-mute);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--text-mute);
+    font-size: 0.95rem;
+    padding: 3rem 0;
+  }
 </style>
