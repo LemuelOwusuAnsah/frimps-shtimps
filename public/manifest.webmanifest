@@ -1,0 +1,17 @@
+{
+  "name": "Frimps Shtimps",
+  "short_name": "Frimps",
+  "description": "A proper Belvedere pub. Cold pints, warm welcomes.",
+  "start_url": "/frimps-shtimps/",
+  "display": "standalone",
+  "background_color": "#fffaf5",
+  "theme_color": "#ea580c",
+  "icons": [
+    {
+      "src": "/frimps-shtimps/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,33 +1,7 @@
 <script>
   import { onMount } from 'svelte'
-
-  const pours = [
-    {
-      name: 'The Belvedere Pale',
-      notes: 'citrus · crisp · 4.2%',
-      img: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=800&h=600&fit=crop&auto=format&q=80',
-      tag: 'House'
-    },
-    {
-      name: 'Shtimps Amber',
-      notes: 'toffee · malty · 4.6%',
-      img: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&h=600&fit=crop&auto=format&q=80',
-      tag: 'Regular'
-    },
-    {
-      name: 'Midnight Stout',
-      notes: 'coffee · chocolate · 5.0%',
-      img: 'https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=800&h=600&fit=crop&auto=format&q=80',
-      tag: 'Guest'
-    }
-  ]
-
-  const numbers = [
-    { n: '2019', label: 'Since' },
-    { n: '6',    label: 'Taps' },
-    { n: '40+',  label: 'Seats' },
-    { n: '7',    label: 'Days a week' }
-  ]
+  import { featured } from '../lib/data/menu.js'
+  import { stats as numbers } from '../lib/data/story.js'
 
   let visible = false
 
@@ -92,11 +66,11 @@
   </div>
 
   <div class="pour-grid">
-    {#each pours as p, i}
+    {#each featured as p, i}
       <article class="pour-card" style="--i:{i}">
         <div class="pour-img">
           <img src={p.img} alt={p.name}>
-          <span class="pour-tag">{p.tag}</span>
+          <span class="pour-tag">{p.tag || p.badge}</span>
         </div>
         <h3>{p.name}</h3>
         <p>{p.notes}</p>
@@ -108,6 +82,7 @@
     <a href="#/menu" class="full-menu-link">see the full menu</a>
   </div>
 </section>
+
 <style>
   .hero {
     max-width: 72rem;

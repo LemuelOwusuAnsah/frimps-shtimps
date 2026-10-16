@@ -1,15 +1,12 @@
 <script>
   import { onMount } from 'svelte'
+  import { dark, toggleTheme } from '../lib/stores/theme.js'
 
   let open = false
   let path = window.location.hash.replace(/^#/, '') || '/'
-  let dark = false
   let scrolled = false
 
   onMount(() => {
-    dark = localStorage.getItem('theme') === 'dark'
-    document.body.classList.toggle('dark', dark)
-
     const onHash = () => {
       path = window.location.hash.replace(/^#/, '') || '/'
       open = false
@@ -30,12 +27,6 @@
 
   function toggle() { open = !open }
   function close() { open = false }
-
-  function toggleTheme() {
-    dark = !dark
-    document.body.classList.toggle('dark', dark)
-    localStorage.setItem('theme', dark ? 'dark' : 'light')
-  }
 
   const links = [
     { href: '#/',      route: '/',      label: 'Home' },
@@ -66,11 +57,11 @@
       <button
         class="theme-toggle"
         on:click={toggleTheme}
-        aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-        aria-pressed={dark}
+        aria-label={$dark ? 'Switch to light mode' : 'Switch to dark mode'}
+        aria-pressed={$dark}
       >
-        <span class="icon" class:flip={dark}>
-          {#if dark}
+        <span class="icon" class:flip={$dark}>
+          {#if $dark}
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="4"/>
               <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>

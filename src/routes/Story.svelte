@@ -1,32 +1,5 @@
 <script>
-  const timeline = [
-    {
-      year: '2019',
-      title: 'We took the keys',
-      text: 'A tired corner boozer on Nuxley Road. Fresh paint, new taps, same regulars.'
-    },
-    {
-      year: '2021',
-      title: 'The kitchen opened',
-      text: 'Real food, cooked to order. Sunday roasts sold out the first weekend.'
-    },
-    {
-      year: '2023',
-      title: 'Six taps, all local',
-      text: 'Every beer on the wall now comes from within 40 miles of Belvedere.'
-    },
-    {
-      year: '2025',
-      title: 'Still pouring',
-      text: 'Same family, same promise. Come in and see for yourself.'
-    }
-  ]
-
-  const values = [
-    { n: '01', h: 'Local first', p: 'Kentish ales, Kentish produce, Kentish people behind the bar.' },
-    { n: '02', h: 'Pour it properly', p: 'Two-pour lagers, settled stouts, glassware that fits the beer.' },
-    { n: '03', h: 'Feed you well', p: 'Nothing frozen, nothing rushed. If it takes longer, it\'s worth it.' }
-  ]
+  import { timeline, values, storyCopy, quote } from '../lib/data/story.js'
 </script>
 
 <section class="page">
@@ -38,25 +11,13 @@
 
   <div class="split">
     <div class="copy">
-      <p>
-        Frimps Shtimps started life as a small corner boozer on Nuxley Road,
-        the kind of place where everyone knows your name before you've
-        reached the bar.
-      </p>
-      <p>
-        When we took it over, we made one promise: keep the warmth, but
-        brighten the place up. Fresh paint, proper taps, a kitchen that
-        actually cares — and the same regulars at the same stools.
-      </p>
-      <p>
-        Six years on, we're still pouring the Belvedere Pale, still
-        doing a Sunday roast worth leaving the house for, and still
-        saving a seat for whoever walks through the door next.
-      </p>
+      {#each storyCopy as para}
+        <p>{para}</p>
+      {/each}
 
       <blockquote class="quote">
-        <p>"If it's not worth the walk, it's not worth the pour."</p>
-        <cite>— The Frimps family</cite>
+        <p>"{quote.text}"</p>
+        <cite>— {quote.cite}</cite>
       </blockquote>
     </div>
 
@@ -96,6 +57,7 @@
     {/each}
   </div>
 </section>
+
 <style>
   .page { max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
 
