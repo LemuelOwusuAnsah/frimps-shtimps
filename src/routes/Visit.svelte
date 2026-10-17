@@ -82,6 +82,11 @@
   $: minDate = new Date().toISOString().slice(0, 10)
 </script>
 
+<svelte:head>
+  <title>Visit & Book · Frimps Shtimps</title>
+  <meta name="description" content="Find us on Nuxley Road, Belvedere. Book a table, check our hours, or just walk in — we'll make room." />
+</svelte:head>
+
 <section class="page">
   <div class="head">
     <span class="tag">Visit</span>
