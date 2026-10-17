@@ -6,6 +6,11 @@
   $: filtered = active === 'all' ? menu : menu.filter(i => i.cat === active)
 </script>
 
+<svelte:head>
+  <title>Menu · Frimps Shtimps</title>
+  <meta name="description" content="Beer, wine, spirits, and a kitchen that doesn't cut corners. The full Frimps Shtimps menu — Belvedere." />
+</svelte:head>
+
 <section class="page">
   <div class="head">
     <span class="tag">Full Menu</span>
