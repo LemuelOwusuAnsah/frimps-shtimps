@@ -10,6 +10,11 @@
   })
 </script>
 
+<svelte:head>
+  <title>Frimps Shtimps · Belvedere pub</title>
+  <meta name="description" content="A proper Belvedere pub with a bright face and an even brighter pour. Cold pints, warm welcomes, and a kitchen that means it." />
+</svelte:head>
+
 <section class="hero" class:visible>
   <div class="hero-inner">
     <div class="hero-copy">
