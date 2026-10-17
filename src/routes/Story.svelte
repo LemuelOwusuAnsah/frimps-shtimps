@@ -2,6 +2,11 @@
   import { timeline, values, storyCopy, quote } from '../lib/data/story.js'
 </script>
 
+<svelte:head>
+  <title>Our Story · Frimps Shtimps</title>
+  <meta name="description" content="Family-run since 2019. How a tired corner boozer on Nuxley Road became Belvedere's warmest pub." />
+</svelte:head>
+
 <section class="page">
   <div class="head">
     <span class="tag">Our Story</span>
