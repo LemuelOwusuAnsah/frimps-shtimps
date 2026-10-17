@@ -1,3 +1,9 @@
+<svelte:head>
+  <title>Page not found · Frimps Shtimps</title>
+  <meta name="description" content="That page isn't on the menu. Pull up a stool instead." />
+  <meta name="robots" content="noindex" />
+</svelte:head>
+
 <section class="page">
   <div class="head">
     <span class="tag">Lost</span>
@@ -31,7 +37,7 @@
     color: var(--text);
     margin: 0 0 1rem;
   }
-  .head h1 em { font-style: italic; color: #ea580c; }
+  .head h1 em { font-style: italic; color: var(--orange-600); }
   @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
   .head .sub {
     font-size: 1.125rem;
@@ -56,7 +62,7 @@
     letter-spacing: 0.025em;
     padding: 0.875rem 2rem;
     border-radius: 9999px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(234, 88, 12, 0.4);
     transition: background 0.3s ease;
     text-decoration: none;
   }
@@ -69,9 +75,9 @@
     letter-spacing: 0.025em;
     padding: 0.875rem 2rem;
     border-radius: 9999px;
-    border: 1px solid rgba(249, 115, 22, 0.4);
+    border: 1px solid var(--border);
     transition: border-color 0.3s ease, color 0.3s ease;
     text-decoration: none;
   }
-  .btn-secondary:hover { border-color: rgba(249, 115, 22, 0.7); color: #c2410c; }
+  .btn-secondary:hover { border-color: var(--orange-500); color: #c2410c; }
 </style>
