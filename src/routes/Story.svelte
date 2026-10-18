@@ -65,7 +65,6 @@
 
 <style>
   .page { max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
-
   .head { text-align: center; margin-bottom: 4rem; }
   .tag {
     display: inline-block;
@@ -92,7 +91,6 @@
     margin: 0 auto;
     font-weight: 300;
   }
-
   .split {
     display: grid;
     grid-template-columns: 1fr;
@@ -101,7 +99,6 @@
     margin-bottom: 6rem;
   }
   @media (min-width: 768px) { .split { grid-template-columns: 1fr 1fr; } }
-
   .copy p {
     font-size: 1.0625rem;
     color: var(--text-soft);
@@ -109,7 +106,6 @@
     font-weight: 300;
     margin: 0 0 1.25rem;
   }
-
   .quote {
     margin: 2rem 0 0;
     padding: 1.5rem 0 1.5rem 1.5rem;
@@ -132,7 +128,6 @@
     color: var(--orange-600);
     font-style: normal;
   }
-
   .art { position: relative; }
   .art img {
     width: 100%;
@@ -145,7 +140,6 @@
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
   .art:hover img { transform: translateY(-6px); }
-
   .art-stamp {
     position: absolute;
     bottom: -1rem;
@@ -180,7 +174,6 @@
     50%      { transform: translateY(-8px); }
   }
   @media (max-width: 767px) { .art-stamp { display: none; } }
-
   .timeline { margin-bottom: 6rem; }
   .tl-head {
     font-family: 'Playfair Display', serif;
@@ -190,7 +183,6 @@
   }
   .dot { color: var(--orange-600); }
   @media (min-width: 768px) { .tl-head { font-size: 2.5rem; } }
-
   .tl-list {
     list-style: none;
     padding: 0;
@@ -207,7 +199,6 @@
     background: var(--border-soft);
   }
   @media (max-width: 639px) { .tl-list::before { display: none; } }
-
   .tl-item {
     display: grid;
     grid-template-columns: 1fr;
@@ -229,7 +220,6 @@
     from { opacity: 0; transform: translateX(-12px); }
     to   { opacity: 1; transform: none; }
   }
-
   .tl-year {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
@@ -239,7 +229,6 @@
   @media (max-width: 639px) {
     .tl-year { margin-bottom: 0.25rem; }
   }
-
   .tl-dot {
     display: none;
     width: 0.85rem;
@@ -252,7 +241,6 @@
     justify-self: center;
   }
   @media (min-width: 640px) { .tl-dot { display: block; } }
-
   .tl-body h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
@@ -266,14 +254,12 @@
     font-weight: 300;
     margin: 0;
   }
-
   .values {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
   @media (min-width: 768px) { .values { grid-template-columns: repeat(3, 1fr); } }
-
   .value {
     background: var(--card);
     backdrop-filter: blur(4px);

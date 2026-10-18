@@ -59,7 +59,6 @@
 
 <style>
   .page { max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
-
   .head { text-align: center; margin-bottom: 3rem; }
   .tag {
     display: inline-block;
@@ -87,7 +86,6 @@
     font-weight: 300;
     line-height: 1.65;
   }
-
   .tabs {
     display: flex;
     flex-wrap: wrap;
@@ -95,7 +93,6 @@
     gap: 0.5rem;
     margin-bottom: 3rem;
   }
-
   .tab {
     font-family: inherit;
     font-size: 0.85rem;
@@ -120,7 +117,6 @@
     outline: 2px solid var(--orange-500);
     outline-offset: 3px;
   }
-
   .grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -128,7 +124,6 @@
   }
   @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-
   .card {
     background: var(--card);
     backdrop-filter: blur(4px);
@@ -150,7 +145,6 @@
     box-shadow: 0 24px 40px -14px rgba(234, 88, 12, 0.25);
     border-color: var(--orange-500);
   }
-
   .card-img { position: relative; overflow: hidden; }
   .card-img img {
     width: 100%;
@@ -160,7 +154,6 @@
     transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
   }
   .card:hover .card-img img { transform: scale(1.05); }
-
   .badge {
     position: absolute;
     top: 0.75rem;
@@ -174,9 +167,7 @@
     color: #fff7ed;
     backdrop-filter: blur(6px);
   }
-
   .card-body { padding: 1.25rem 1.5rem 1.5rem; }
-
   .card-row {
     display: flex;
     justify-content: space-between;
@@ -202,7 +193,6 @@
     line-height: 1.5;
     margin: 0;
   }
-
   .empty {
     text-align: center;
     color: var(--text-mute);
