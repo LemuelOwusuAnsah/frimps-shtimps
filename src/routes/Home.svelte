@@ -2,6 +2,9 @@
   import { onMount } from 'svelte'
   import { featured } from '../lib/data/menu.js'
   import { stats as numbers } from '../lib/data/story.js'
+  import Button from '../lib/components/Button.svelte'
+  import Card from '../lib/components/Card.svelte'
+  import Badge from '../lib/components/Badge.svelte'
 
   let visible = false
 
@@ -28,11 +31,11 @@
         Come for the pints, stay for the company.
       </p>
       <div class="hero-actions">
-        <a href="#/menu" class="btn-primary">
+        <Button href="#/menu" variant="primary">
           See our menu
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#/visit" class="btn-secondary">Book a table</a>
+        </Button>
+        <Button href="#/visit" variant="secondary">Book a table</Button>
       </div>
 
       <div class="hero-stats">
@@ -52,9 +55,8 @@
           src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=900&h=900&fit=crop&auto=format&q=80"
           alt="A pint of beer being poured"
         >
-        <div class="badge">
-          <span class="badge-dot"></span>
-          Pouring today
+        <div class="badge-wrap">
+          <Badge variant="live" dot>Pouring today</Badge>
         </div>
       </div>
       <div class="hero-orbit">
@@ -72,14 +74,18 @@
 
   <div class="pour-grid">
     {#each featured as p, i}
-      <article class="pour-card" style="--i:{i}">
+      <Card index={i}>
         <div class="pour-img">
           <img src={p.img} alt={p.name}>
-          <span class="pour-tag">{p.tag || p.badge}</span>
+          <div class="badge-wrap">
+            <Badge>{p.badge || p.tag}</Badge>
+          </div>
         </div>
-        <h3>{p.name}</h3>
-        <p>{p.notes}</p>
-      </article>
+        <div class="pour-body">
+          <h3>{p.name}</h3>
+          <p>{p.notes}</p>
+        </div>
+      </Card>
     {/each}
   </div>
 
@@ -145,43 +151,18 @@
     gap: 1rem;
     padding-top: 0.5rem;
   }
-  .btn-primary,
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    letter-spacing: 0.025em;
-    padding: 0.9rem 1.75rem;
-    border-radius: 9999px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .btn-primary {
-    background: var(--orange-600);
-    color: #fff7ed;
-    border: 1px solid var(--orange-600);
-  }
-  .btn-primary:hover {
-    background: var(--orange-700);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px -10px rgba(234, 88, 12, 0.5);
-  }
-  .btn-primary svg {
-    width: 1rem; height: 1rem;
-    stroke: currentColor; fill: none;
-    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  .hero-actions :global(.btn-primary svg) {
+    width: 1rem;
+    height: 1rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
     transition: transform 0.3s ease;
   }
-  .btn-primary:hover svg { transform: translateX(3px); }
-  .btn-secondary {
-    background: var(--card-soft);
-    color: var(--orange-600);
-    border: 1px solid var(--border);
-  }
-  .btn-secondary:hover {
-    border-color: var(--orange-500);
-    transform: translateY(-2px);
+  .hero-actions :global(.btn-primary:hover svg) {
+    transform: translateX(3px);
   }
   .hero-stats {
     display: grid;
@@ -231,31 +212,10 @@
     border-radius: 1rem;
     display: block;
   }
-  .badge {
+  .badge-wrap {
     position: absolute;
     top: 1.75rem;
     left: 1.75rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    padding: 0.4rem 0.8rem;
-    border-radius: 9999px;
-    background: rgba(20, 12, 8, 0.75);
-    color: #fff7ed;
-    backdrop-filter: blur(6px);
-  }
-  .badge-dot {
-    width: 0.5rem; height: 0.5rem;
-    border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50%      { transform: scale(1.15); opacity: 0.8; }
   }
   .hero-orbit {
     position: absolute;
@@ -313,57 +273,30 @@
     gap: 2rem;
   }
   @media (min-width: 768px) { .pour-grid { grid-template-columns: repeat(3, 1fr); } }
-  .pour-card {
-    background: var(--card);
-    backdrop-filter: blur(4px);
-    border-radius: 1.5rem;
-    padding: 1.25rem;
-    border: 1px solid var(--border);
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-                box-shadow 0.5s ease,
-                border-color 0.3s ease;
-    animation: rise 0.7s cubic-bezier(0.23, 1, 0.32, 1) backwards;
-    animation-delay: calc(var(--i) * 90ms);
+  .pour-img {
+    position: relative;
+    overflow: hidden;
   }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: none; }
-  }
-  .pour-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 40px -14px rgba(234, 88, 12, 0.25);
-    border-color: var(--orange-500);
-  }
-  .pour-img { position: relative; margin-bottom: 1.25rem; }
   .pour-img img {
     width: 100%;
     height: 14rem;
     object-fit: cover;
-    border-radius: 1rem;
     display: block;
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .pour-card:hover .pour-img img { transform: scale(1.04); }
-  .pour-tag {
+  .pour-img .badge-wrap {
     position: absolute;
     top: 0.75rem;
     left: 0.75rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.7rem;
-    border-radius: 9999px;
-    background: rgba(20, 12, 8, 0.75);
-    color: #fff7ed;
-    backdrop-filter: blur(6px);
   }
-  .pour-card h3 {
+  .pour-body { padding: 1.25rem 1.5rem 1.5rem; }
+  .pour-body h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.25rem;
     color: var(--text);
     margin: 0 0 0.35rem;
   }
-  .pour-card p {
+  .pour-body p {
     color: var(--orange-600);
     font-size: 0.85rem;
     margin: 0;
