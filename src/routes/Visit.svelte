@@ -1,5 +1,7 @@
 <script>
   import { onMount } from 'svelte'
+  import Section from '../lib/components/Section.svelte'
+  import Button from '../lib/components/Button.svelte'
 
   let name = ''
   let email = ''
@@ -87,13 +89,13 @@
   <meta name="description" content="Find us on Nuxley Road, Belvedere. Book a table, check our hours, or just walk in — we'll make room." />
 </svelte:head>
 
-<section class="page">
-  <div class="head">
-    <span class="tag">Visit</span>
-    <h1>Come <em>through</em></h1>
-    <p class="sub">Book a table, find us, or just show up — we'll make room.</p>
-  </div>
-
+<Section
+  tag="Visit"
+  title="Come "
+  titleEm="through"
+  subtitle="Book a table, find us, or just show up — we'll make room."
+  center
+>
   <div class="split">
     <div class="info">
       <h2><span class="dot">·</span> Find us</h2>
@@ -134,7 +136,7 @@
             on <strong>{date}</strong> at <strong>{time}</strong>.
             A confirmation is on its way to <strong>{email}</strong>.
           </p>
-          <button class="btn-secondary" on:click={reset}>Book another</button>
+          <Button variant="secondary" on:click={reset}>Book another</Button>
         </div>
       {:else}
         <form on:submit={submit} novalidate>
@@ -216,49 +218,20 @@
             ></textarea>
           </label>
 
-          <button type="submit" class="btn" disabled={sending}>
+          <Button type="submit" variant="primary" full disabled={sending}>
             {#if sending}
               <span class="spinner"></span> Sending…
             {:else}
               Request booking
             {/if}
-          </button>
+          </Button>
         </form>
       {/if}
     </div>
   </div>
-</section>
+</Section>
 
 <style>
-  .page { max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
-
-  .head { text-align: center; margin-bottom: 4rem; }
-  .tag {
-    display: inline-block;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(194, 65, 12, 0.7);
-    margin-bottom: 1.5rem;
-  }
-  .head h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    line-height: 1.1;
-    font-weight: 500;
-    color: var(--text);
-    margin: 0 0 1rem;
-  }
-  .head h1 em { font-style: italic; color: var(--orange-600); }
-  @media (min-width: 768px) { .head h1 { font-size: 4.5rem; } }
-  .head .sub {
-    font-size: 1.125rem;
-    color: var(--text-soft);
-    max-width: 28rem;
-    margin: 0 auto;
-    font-weight: 300;
-  }
-
   .split {
     display: grid;
     grid-template-columns: 1fr;
@@ -403,37 +376,6 @@
     outline: 2px solid var(--orange-500);
     outline-offset: 2px;
   }
-
-  .btn, .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: inherit;
-    font-size: 0.875rem;
-    letter-spacing: 0.025em;
-    padding: 0.875rem 2rem;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-    margin-top: 0.5rem;
-  }
-  .btn {
-    background: var(--orange-600);
-    color: #fff7ed;
-    border: 1px solid var(--orange-600);
-    width: 100%;
-  }
-  .btn:hover:not(:disabled) { background: var(--orange-700); }
-  .btn:disabled { opacity: 0.7; cursor: wait; }
-  .btn:focus-visible { outline: 2px solid var(--orange-500); outline-offset: 3px; }
-
-  .btn-secondary {
-    background: var(--card-soft);
-    color: var(--orange-600);
-    border: 1px solid var(--border);
-  }
-  .btn-secondary:hover { border-color: var(--orange-500); }
 
   .spinner {
     width: 0.9rem;
