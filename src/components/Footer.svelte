@@ -1,17 +1,13 @@
 <script>
-  let year = new Date().getFullYear()
+  import { site } from '../lib/data/site.js'
+
+  const year = new Date().getFullYear()
 
   const explore = [
     { href: '#/',      label: 'Home' },
     { href: '#/story', label: 'Our Story' },
     { href: '#/menu',  label: 'Menu' },
     { href: '#/visit', label: 'Visit' },
-  ]
-
-  const socials = [
-    { href: 'https://instagram.com', label: 'Instagram', icon: 'instagram' },
-    { href: 'https://facebook.com',  label: 'Facebook',  icon: 'facebook' },
-    { href: 'https://x.com',         label: 'X',         icon: 'x' },
   ]
 
   function toTop(e) {
@@ -26,13 +22,13 @@
       <div class="col brand-col">
         <a href="#/" class="brand">
           <span class="brand-mark">FS</span>
-          <span class="brand-text">Frimps Shtimps</span>
+          <span class="brand-text">{site.name}</span>
         </a>
         <p class="blurb">
-          A proper Belvedere pub. Cold pints, warm welcomes, and a kitchen that means it.
+          A proper {site.location} pub. Cold pints, warm welcomes, and a kitchen that means it.
         </p>
         <div class="socials">
-          {#each socials as s}
+          {#each site.socials as s}
             <a href={s.href} class="social" aria-label={s.label} target="_blank" rel="noopener noreferrer">
               {#if s.icon === 'instagram'}
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -66,24 +62,24 @@
       <div class="col">
         <div class="label">Find us</div>
         <ul class="list plain">
-          <li>42 Nuxley Road</li>
-          <li>Belvedere, Kent DA17</li>
-          <li>01322 000 000</li>
+          <li>{site.address.street}</li>
+          <li>{site.address.area}, {site.address.county} {site.address.postcode}</li>
+          <li><a href={site.phone.href}>{site.phone.display}</a></li>
         </ul>
       </div>
 
       <div class="col">
         <div class="label">Hours</div>
         <ul class="list plain">
-          <li><span>Mon–Thu</span> 11am–11pm</li>
-          <li><span>Fri–Sat</span> 11am–1am</li>
-          <li><span>Sun</span> 12pm–10:30pm</li>
+          {#each site.hours as h}
+            <li><span>{h.days}</span> {h.time}</li>
+          {/each}
         </ul>
       </div>
     </div>
 
     <div class="bottom">
-      <p class="copy">© {year} Frimps Shtimps · Belvedere · brewed for good company</p>
+      <p class="copy">© {year} {site.name} · {site.location} · brewed for good company</p>
       <button class="top" on:click={toTop} aria-label="Back to top">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 19V5M5 12l7-7 7 7"/>
