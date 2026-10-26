@@ -1,6 +1,8 @@
 <script>
   import { timeline, values, storyCopy, quote } from '../lib/data/story.js'
+  import { site } from '../lib/data/site.js'
   import Section from '../lib/components/Section.svelte'
+  import Image from '../lib/components/Image.svelte'
 </script>
 
 <svelte:head>
@@ -12,7 +14,7 @@
   tag="Our Story"
   title="A pub with a "
   titleEm="past"
-  subtitle="Family-run since 2019, and it shows."
+  subtitle="Family-run since {site.established}, and it shows."
   center
 >
   <div class="split">
@@ -28,11 +30,16 @@
     </div>
 
     <div class="art">
-      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=900&h=1100&fit=crop&auto=format&q=80" alt="Pub interior">
+      <Image
+        src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=900&h=1100&fit=crop&auto=format&q=80"
+        alt="Pub interior"
+        ratio="4/5"
+        rounded="1.5rem"
+      />
       <div class="art-stamp">
         <span>EST.</span>
-        <strong>2019</strong>
-        <span>Belvedere</span>
+        <strong>{site.established}</strong>
+        <span>{site.location}</span>
       </div>
     </div>
   </div>
@@ -106,17 +113,6 @@
   }
 
   .art { position: relative; }
-  .art img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 1.5rem;
-    border: 1px solid var(--border);
-    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .art:hover img { transform: translateY(-6px); }
 
   .art-stamp {
     position: absolute;

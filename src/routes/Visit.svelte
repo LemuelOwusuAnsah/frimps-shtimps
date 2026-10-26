@@ -1,7 +1,10 @@
 <script>
   import { onMount } from 'svelte'
+  import { site } from '../lib/data/site.js'
+  import { formatDate } from '../lib/utils/format.js'
   import Section from '../lib/components/Section.svelte'
   import Button from '../lib/components/Button.svelte'
+  import Image from '../lib/components/Image.svelte'
 
   let name = ''
   let email = ''
@@ -85,8 +88,8 @@
 </script>
 
 <svelte:head>
-  <title>Visit & Book · Frimps Shtimps</title>
-  <meta name="description" content="Find us on Nuxley Road, Belvedere. Book a table, check our hours, or just walk in — we'll make room." />
+  <title>Visit & Book · {site.name}</title>
+  <meta name="description" content="Find us on {site.address.street}, {site.address.area}. Book a table, check our hours, or just walk in — we'll make room." />
 </svelte:head>
 
 <Section
@@ -102,21 +105,27 @@
       <ul class="details">
         <li>
           <strong>Address</strong>
-          42 Nuxley Road, Belvedere, Kent DA17
+          {site.address.street}, {site.address.area}, {site.address.county} {site.address.postcode}
         </li>
         <li>
           <strong>Hours</strong>
-          Mon–Thu 11am–11pm · Fri–Sat 11am–1am
-          Sun 12pm–10:30pm
+          {#each site.hours as h}
+            {h.days} {h.time}{#if h !== site.hours[site.hours.length - 1]} · {/if}
+          {/each}
         </li>
         <li>
           <strong>Phone</strong>
-          <a href="tel:+441322000000">01322 000 000</a>
+          <a href={site.phone.href}>{site.phone.display}</a>
         </li>
       </ul>
 
       <div class="map">
-        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&auto=format&q=80" alt="Map of Belvedere">
+        <Image
+          src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&auto=format&q=80"
+          alt="Map of {site.location}"
+          ratio="16/10"
+          rounded="1.5rem"
+        />
       </div>
     </div>
 
@@ -133,7 +142,7 @@
           <h3>Booking requested</h3>
           <p>
             Thanks {name.split(' ')[0]} — we've got your table for <strong>{party}</strong>
-            on <strong>{date}</strong> at <strong>{time}</strong>.
+            on <strong>{formatDate(date)}</strong> at <strong>{time}</strong>.
             A confirmation is on its way to <strong>{email}</strong>.
           </p>
           <Button variant="secondary" on:click={reset}>Book another</Button>
@@ -269,15 +278,6 @@
     margin-bottom: 0.25rem;
   }
   .details a { color: var(--orange-600); }
-
-  .map img {
-    width: 100%;
-    height: 16rem;
-    object-fit: cover;
-    border-radius: 1.5rem;
-    border: 1px solid var(--border);
-    display: block;
-  }
 
   .form-wrap {
     background: var(--card);
