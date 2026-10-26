@@ -1,16 +1,13 @@
 <script>
-  import { onMount } from 'svelte'
   import { featured } from '../lib/data/menu.js'
   import { stats as numbers } from '../lib/data/story.js'
+  import { reveal } from '../lib/motion.js'
   import Button from '../lib/components/Button.svelte'
   import Card from '../lib/components/Card.svelte'
   import Badge from '../lib/components/Badge.svelte'
+  import Image from '../lib/components/Image.svelte'
 
-  let visible = false
-
-  onMount(() => {
-    setTimeout(() => { visible = true }, 80)
-  })
+  const vis = reveal(80)
 </script>
 
 <svelte:head>
@@ -18,7 +15,7 @@
   <meta name="description" content="A proper Belvedere pub with a bright face and an even brighter pour. Cold pints, warm welcomes, and a kitchen that means it." />
 </svelte:head>
 
-<section class="hero" class:visible>
+<section class="hero" class:visible={vis.visible}>
   <div class="hero-inner">
     <div class="hero-copy">
       <span class="tag">Cold pints · Warm welcomes</span>
@@ -51,10 +48,12 @@
     <div class="hero-art">
       <div class="hero-art-glow"></div>
       <div class="hero-art-card">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=900&h=900&fit=crop&auto=format&q=80"
           alt="A pint of beer being poured"
-        >
+          ratio="1/1"
+          rounded="1rem"
+        />
         <div class="badge-wrap">
           <Badge variant="live" dot>Pouring today</Badge>
         </div>
@@ -76,7 +75,7 @@
     {#each featured as p, i}
       <Card index={i}>
         <div class="pour-img">
-          <img src={p.img} alt={p.name}>
+          <Image src={p.img} alt={p.name} ratio="16/9" rounded="0" zoom />
           <div class="badge-wrap">
             <Badge>{p.badge || p.tag}</Badge>
           </div>
@@ -205,13 +204,6 @@
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
   .hero-art-card:hover { transform: translateY(-6px) scale(1.01); }
-  .hero-art-card img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 1rem;
-    display: block;
-  }
   .badge-wrap {
     position: absolute;
     top: 1.75rem;
@@ -273,17 +265,7 @@
     gap: 2rem;
   }
   @media (min-width: 768px) { .pour-grid { grid-template-columns: repeat(3, 1fr); } }
-  .pour-img {
-    position: relative;
-    overflow: hidden;
-  }
-  .pour-img img {
-    width: 100%;
-    height: 14rem;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  }
+  .pour-img { position: relative; }
   .pour-img .badge-wrap {
     position: absolute;
     top: 0.75rem;

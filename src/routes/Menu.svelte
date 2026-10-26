@@ -1,8 +1,10 @@
 <script>
   import { menu, categories } from '../lib/data/menu.js'
+  import { formatPrice } from '../lib/utils/format.js'
   import Section from '../lib/components/Section.svelte'
   import Card from '../lib/components/Card.svelte'
   import Badge from '../lib/components/Badge.svelte'
+  import Image from '../lib/components/Image.svelte'
 
   let active = 'all'
 
@@ -39,7 +41,7 @@
     {#each filtered as item, i (item.name)}
       <Card index={i}>
         <div class="card-img">
-          <img src={item.img} alt={item.name}>
+          <Image src={item.img} alt={item.name} ratio="16/9" rounded="0" zoom />
           {#if item.badge}
             <div class="badge-wrap">
               <Badge>{item.badge}</Badge>
@@ -49,7 +51,7 @@
         <div class="card-body">
           <div class="card-row">
             <h3>{item.name}</h3>
-            <span class="price">£{item.price}</span>
+            <span class="price">{formatPrice(item.price)}</span>
           </div>
           <p>{item.notes}</p>
         </div>
@@ -104,14 +106,7 @@
   @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
-  .card-img { position: relative; overflow: hidden; }
-  .card-img img {
-    width: 100%;
-    height: 13rem;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-  }
+  .card-img { position: relative; }
   .badge-wrap {
     position: absolute;
     top: 0.75rem;
