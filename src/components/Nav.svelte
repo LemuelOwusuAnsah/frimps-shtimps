@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { dark, toggleTheme } from '../lib/stores/theme.js'
+  import { links } from '../lib/data/nav.js'
 
   let open = false
   let path = window.location.hash.replace(/^#/, '') || '/'
@@ -27,13 +28,6 @@
 
   function toggle() { open = !open }
   function close() { open = false }
-
-  const links = [
-    { href: '#/',      route: '/',      label: 'Home' },
-    { href: '#/story', route: '/story', label: 'Our Story' },
-    { href: '#/menu',  route: '/menu',  label: 'Menu' },
-    { href: '#/visit', route: '/visit', label: 'Visit' },
-  ]
 </script>
 
 <a class="skip" href="#main">Skip to content</a>
