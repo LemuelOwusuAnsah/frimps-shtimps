@@ -8,6 +8,18 @@
 <svelte:head>
   <title>Our Story · Frimps Shtimps</title>
   <meta name="description" content="Family-run since 2019. How a tired corner boozer on Nuxley Road became Belvedere's warmest pub." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Frimps Shtimps" />
+  <meta property="og:title" content="Our Story · Frimps Shtimps" />
+  <meta property="og:description" content="Family-run since 2019. How a tired corner boozer on Nuxley Road became Belvedere's warmest pub." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Our Story · Frimps Shtimps" />
+  <meta name="twitter:description" content="Family-run since 2019. How a tired corner boozer on Nuxley Road became Belvedere's warmest pub." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
 </svelte:head>
 
 <Section

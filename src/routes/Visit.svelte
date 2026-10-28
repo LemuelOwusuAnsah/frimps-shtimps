@@ -90,6 +90,18 @@
 <svelte:head>
   <title>Visit & Book · {site.name}</title>
   <meta name="description" content="Find us on {site.address.street}, {site.address.area}. Book a table, check our hours, or just walk in — we'll make room." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Frimps Shtimps" />
+  <meta property="og:title" content="Visit & Book · Frimps Shtimps" />
+  <meta property="og:description" content="Find us on Nuxley Road, Belvedere. Book a table, check our hours, or just walk in — we'll make room." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Visit & Book · Frimps Shtimps" />
+  <meta name="twitter:description" content="Find us on Nuxley Road, Belvedere. Book a table, check our hours, or just walk in — we'll make room." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
 </svelte:head>
 
 <Section

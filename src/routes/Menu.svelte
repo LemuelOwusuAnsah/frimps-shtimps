@@ -14,6 +14,18 @@
 <svelte:head>
   <title>Menu · Frimps Shtimps</title>
   <meta name="description" content="Beer, wine, spirits, and a kitchen that doesn't cut corners. The full Frimps Shtimps menu — Belvedere." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Frimps Shtimps" />
+  <meta property="og:title" content="Menu · Frimps Shtimps" />
+  <meta property="og:description" content="Beer, wine, spirits, and a kitchen that doesn't cut corners. The full Frimps Shtimps menu — Belvedere." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Menu · Frimps Shtimps" />
+  <meta name="twitter:description" content="Beer, wine, spirits, and a kitchen that doesn't cut corners. The full Frimps Shtimps menu — Belvedere." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
 </svelte:head>
 
 <Section

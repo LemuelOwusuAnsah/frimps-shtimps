@@ -13,6 +13,18 @@
 <svelte:head>
   <title>Frimps Shtimps · Belvedere pub</title>
   <meta name="description" content="A proper Belvedere pub with a bright face and an even brighter pour. Cold pints, warm welcomes, and a kitchen that means it." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Frimps Shtimps" />
+  <meta property="og:title" content="Frimps Shtimps · Belvedere pub" />
+  <meta property="og:description" content="A proper Belvedere pub with a bright face and an even brighter pour. Cold pints, warm welcomes, and a kitchen that means it." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Frimps Shtimps · Belvedere pub" />
+  <meta name="twitter:description" content="A proper Belvedere pub with a bright face and an even brighter pour. Cold pints, warm welcomes, and a kitchen that means it." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
 </svelte:head>
 
 <section class="hero" class:visible={vis.visible}>
