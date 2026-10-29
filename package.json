@@ -12,6 +12,7 @@
     "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
     "eslint": "^10.13.0",
     "eslint-plugin-svelte": "^3.23.1",

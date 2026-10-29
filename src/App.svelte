@@ -25,7 +25,7 @@
 <Nav />
 <main id="main">
   <svelte:boundary>
-    {#snippet failed(error, reset)}
+    {#snippet failed(_error, reset)}
       <section class="crash">
         <h1>Something spilled</h1>
         <p>That page hit an error. It's been logged — try again.</p>
