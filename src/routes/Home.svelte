@@ -1,13 +1,18 @@
 <script>
+  import { onMount } from 'svelte'
   import { featured } from '../lib/data/menu.js'
   import { stats as numbers } from '../lib/data/story.js'
-  import { reveal } from '../lib/motion.js'
   import Button from '../lib/components/Button.svelte'
   import Card from '../lib/components/Card.svelte'
   import Badge from '../lib/components/Badge.svelte'
   import Image from '../lib/components/Image.svelte'
 
-  const vis = reveal(80)
+  let visible = $state(false)
+
+  onMount(() => {
+    const t = setTimeout(() => { visible = true }, 80)
+    return () => clearTimeout(t)
+  })
 </script>
 
 <svelte:head>
@@ -27,7 +32,7 @@
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=1200&h=630&fit=crop&auto=format&q=80" />
 </svelte:head>
 
-<section class="hero" class:visible={vis.visible}>
+<section class="hero" class:visible>
   <div class="hero-inner">
     <div class="hero-copy">
       <span class="tag">Cold pints · Warm welcomes</span>
