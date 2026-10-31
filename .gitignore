@@ -3,3 +3,7 @@ dist
 .DS_Store
 *.log
 .vite
+coverage
+.vitest
+playwright-report
+test-results
