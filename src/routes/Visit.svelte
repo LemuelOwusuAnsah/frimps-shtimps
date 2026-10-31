@@ -95,7 +95,7 @@
       if (!res.ok) throw new Error('Request failed')
       sending = false
       sent = true
-    } catch (err) {
+    } catch {
       sending = false
       errors = { ...errors, submit: 'Could not send — try calling us on ' + '01322 000 000' }
     }
