@@ -67,9 +67,38 @@
     if (!validate()) return
 
     sending = true
-    await new Promise(r => setTimeout(r, 900))
-    sending = false
-    sent = true
+
+    const endpoint = import.meta.env.VITE_BOOKING_ENDPOINT
+
+    if (!endpoint) {
+      // No endpoint configured — simulate success for local dev
+      await new Promise(r => setTimeout(r, 600))
+      sending = false
+      sent = true
+      return
+    }
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          date,
+          time,
+          party,
+          notes
+        })
+      })
+
+      if (!res.ok) throw new Error('Request failed')
+      sending = false
+      sent = true
+    } catch (err) {
+      sending = false
+      errors = { ...errors, submit: 'Could not send — try calling us on ' + '01322 000 000' }
+    }
   }
 
   function reset() {
@@ -246,6 +275,9 @@
               Request booking
             {/if}
           </Button>
+          {#if errors.submit}
+            <em class="msg">{errors.submit}</em>
+          {/if}
         </form>
       {/if}
     </div>
